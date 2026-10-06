@@ -38,7 +38,7 @@ must still use the repository's authenticated index verification.
 
 ## Main engineering risks
 
-`seccomp-shim.c` is explicitly ARM assembly: registers x0–x8, `svc #0`,
+`seccomp-shim.c` is explicitly ARM assembly: registers x0 to x8, `svc #0`,
 ARM syscall numbers, ARM ucontext access, and signal return assumptions. Changing
 the compiler target alone cannot port it. An x86_64 implementation must use its
 own syscall convention, register context, syscall constants, and signal restorer
