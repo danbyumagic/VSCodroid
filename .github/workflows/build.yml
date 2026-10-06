@@ -363,7 +363,6 @@ jobs:
       - name: Check the monitor recognises the language servers that ship
         run: |
           python3 scripts/check-langserver-patterns.py \
-            android/app/src/main/assets/.vscodroid-abi
             android/app/src/main/assets/vscode-reh/extensions
 
       # The welcome screen is committed source describing runtimes resolved from

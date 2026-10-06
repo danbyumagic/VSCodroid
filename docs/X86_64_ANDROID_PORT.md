@@ -4,20 +4,24 @@ Research date: 2026-10-06. Target: user's Lenovo Googlebook running Android 17.
 
 ## Conclusion
 
-A native x86_64 port is feasible. The Kotlin/WebView app architecture can stay;
+A native x86_64 port is feasible. The Kotlin/WebView app architecture stayed;
 the native server runtime, addons, tools, compatibility code, and packaging
-must become architecture-aware. Installing the Termux app is unnecessary:
+are architecture-aware. Installing the Termux app is unnecessary:
 VSCodroid bundles selected Termux-built Android binaries in its own APK.
 
-This is an investigation and implementation plan, not a working port. No APK
-has been built or run on the target device. ADB currently reports no devices.
-Confirm the device's reported ABI before installation; the exact model remains
-unconfirmed. Lenovo's published Googlebook 15 specification names Intel Core
-Ultra 5, but hardware specifications alone do not establish the app runtime ABI.
+A host x86_64 debug APK has been assembled. It has not been run on a device:
+ADB reported no devices, and device testing was deferred. Confirm the device's
+reported ABI before installation; the exact model remains unconfirmed. Lenovo's
+published Googlebook 15 specification names Intel Core Ultra 5, but hardware
+specifications alone do not establish the app runtime ABI. What that host build
+produced is in [x86_64 build validation](X86_64_BUILD_VALIDATION.md).
 
-## Evidence from this checkout
+## Restrictions this port started from
 
-| Area | Current restriction | Required change |
+These limits were in the checkout before the port. The table is that record,
+not the current build.
+
+| Area | Restriction found | Change made |
 | --- | --- | --- |
 | Android Gradle | `app/build.gradle.kts` filters to `arm64-v8a`; multiple gates hardcode its JNI directory | Select ABI and matching staged assets together |
 | Package downloads | `download-node.sh`, `lib/termux-packages.sh`, and tool scripts use ARM package indexes/paths | Resolve x86_64 packages with all dependencies and existing signature/digest verification |
